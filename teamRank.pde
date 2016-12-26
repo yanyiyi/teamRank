@@ -10,6 +10,7 @@ void setup(){
   imgNum[i] = loadImage("n"+ j +".png");
   imgRank[i] = loadImage(j +".png");
   imgRankNum[i]= i;
+  imgRankNumTemp[i]= i;
   }
   background(50);
 }
@@ -41,15 +42,18 @@ void draw(){
 
 }
   float sX; 
-  float sY;  
+  float sY;
 void mouseClicked() {
      sX = (mouseX-20) / 120;
      sY = (mouseY-33) / 100;
     println("No"+ int(sY+1) + ":" + int(sX));
     image(imgRank[int(sX)],120*10+20,20+int(sY)*100,150,50);
+     for(int i = 0; i < 10; i++){
+     if(imgRankNumTemp[i] == int(sX)) imgRankNumTemp[i] = imgRankNumTemp[int(sY)];
+    }
     imgRankNumTemp[int(sY)] = int(sX);
+    
 }
-
 
 void keyPressed()
 {
@@ -59,6 +63,7 @@ void keyPressed()
     
           for(int i = 0; i < 10; i++){
            imgRankNum[i]= imgRankNumTemp[i];
+            
             int j = i + 1;
             image(imgRank[imgRankNum[i]],width-300,i*100);
   }
